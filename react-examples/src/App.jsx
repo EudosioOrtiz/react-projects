@@ -14,7 +14,7 @@ function App() {
 //tambien se puede pasar un elemento como children
 
 
-const eudo = {isFollowingVA: true, userName: 'eudortiz'} //es bueno es ciertos casos usar el spread operator pero es mejor declarar que le damos como prop al componente 
+const eudo = {initialIsFollowing: true, userName: 'eudortiz'} //es bueno es ciertos casos usar el spread operator pero es mejor declarar que le damos como prop al componente 
 
 const [name,setName] = useState('Eudosio Ortiz') //posicion[valor del estado, forma de actualizar el estado]
 //los cambios se propagan hacia abajo
@@ -28,16 +28,16 @@ const [name,setName] = useState('Eudosio Ortiz') //posicion[valor del estado, fo
       <TwitterFollowCard {...eudo}
         >Eudosio Ortiz 2
       </TwitterFollowCard>
-
+      {/*comment */}
       <TwitterFollowCard 
         userName={"eudortiz3"} 
-        isFollowingVA={false}>Eudosio Ortiz 3
+        initialIsFollowing={false}>Eudosio Ortiz 3
       </TwitterFollowCard>
 
       <TwitterFollowCard 
 
         userName={"eudortiz4"} 
-        isFollowingVA={false}>{name}
+        initialIsFollowing={false}>{name}
       </TwitterFollowCard>
       <button onClick={()=>setName("Thor")}>
         Cambio nombre
