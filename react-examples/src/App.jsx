@@ -19,29 +19,46 @@ const eudo = {initialIsFollowing: true, userName: 'eudortiz'} //es bueno es cier
 const [name,setName] = useState('Eudosio Ortiz') //posicion[valor del estado, forma de actualizar el estado]
 //los cambios se propagan hacia abajo
 //en cada cambio de estado reenderiza todo al mismo tiempo aunque no cambie algun otro hijo
+
+const users = [
+  {
+    userName: 'midudev',
+    name: 'Miguel Ángel Durán',
+    isFollowing: true
+  },
+  {
+    userName: 'pheralb',
+    name: 'Pablo H.',
+    isFollowing: false
+  },
+  {
+    userName: 'PacoHdezs',
+    name: 'Paco Hdez',
+    isFollowing: true
+  },
+  {
+    userName: 'TMChein',
+    name: 'Tomas',
+    isFollowing: false
+  }
+]
+
+//siempre hacer la logica y funciones de javascript arriba del reenderizado
   return (
     <section className='App'>
-      <TwitterFollowCard {...eudo}
-        >Eudosio Ortiz 
-      </TwitterFollowCard>
-      
-      <TwitterFollowCard {...eudo}
-        >Eudosio Ortiz 2
-      </TwitterFollowCard>
-      {/*comment */}
-      <TwitterFollowCard 
-        userName={"eudortiz3"} 
-        initialIsFollowing={false}>Eudosio Ortiz 3
-      </TwitterFollowCard>
-
-      <TwitterFollowCard 
-
-        userName={"eudortiz4"} 
-        initialIsFollowing={false}>{name}
-      </TwitterFollowCard>
-      <button onClick={()=>setName("Thor")}>
-        Cambio nombre
-      </button>
+      {
+        users.map(({userName, name, isFollowing} )=>{
+          return(
+            <TwitterFollowCard
+              key={userName}
+              userName={userName} 
+              initialIsFollowing={isFollowing}
+            >
+              {name}
+            </TwitterFollowCard>
+          )
+        })
+      }
     </section>
   )
 }
@@ -75,4 +92,33 @@ const formatedUserName = <span>@eudortiz</span>
   userName={"eudortiz2"} 
   isFollowing={true}>Eudosio Ortiz //propiedad children
 </TwitterFollowCard>
+*/
+
+/*
+return (
+    <section className='App'>
+      <TwitterFollowCard {...eudo}
+        >Eudosio Ortiz 
+      </TwitterFollowCard>
+      
+      <TwitterFollowCard {...eudo}
+        >Eudosio Ortiz 2
+      </TwitterFollowCard>
+      
+      <TwitterFollowCard 
+        userName={"eudortiz3"} 
+        initialIsFollowing={false}>Eudosio Ortiz 3
+      </TwitterFollowCard>
+
+      <TwitterFollowCard 
+
+        userName={"eudortiz4"} 
+        initialIsFollowing={false}>{name}
+      </TwitterFollowCard>
+      <button onClick={()=>setName("Thor")}>
+        Cambio nombre
+      </button>
+    </section>
+  )
+}
 */
