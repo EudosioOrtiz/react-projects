@@ -1,4 +1,4 @@
-import { Children, useState } from 'react'
+import { Children, useState, useEffect} from 'react'
 import confetti from 'canvas-confetti'
 import {Square} from './components/Square.jsx'
 import {TURNS} from "./constans.js";
@@ -41,12 +41,12 @@ function App() {
     const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
     setTurn(newTurn)
 
-    //guardar sesion
+    //guardar sesion cada que cambia el turno o tablero
     saveGameToStorage({
-      board: newBoard,
-      turn: newTurn
+        board: newBoard,
+        turn: newTurn
     })
-
+   
     const newWinner = checkWinnerFrom(newBoard)
     if (newWinner) {
       confetti()
@@ -55,6 +55,11 @@ function App() {
       setWinner(false)
     }
   }
+
+  useEffect(()=>{
+    console.log("useEffect")
+  }, [winner])
+
 
   return (
     <main className='board'>
