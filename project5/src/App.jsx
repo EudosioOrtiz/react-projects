@@ -6,7 +6,6 @@ import { useEffect } from 'react'
 
 // CUSTOM HOOK COMBINANDO HOOKS y modularizando logica de Hooks del componente
 function useSearch() {
-  
 
   const [search, updateSearch] = useState('')
   const [error, setError] = useState(null)
@@ -39,8 +38,9 @@ function useSearch() {
 }
 
 function App() {
+  const [sort, setSort] = useState(false);
   const {search, updateSearch, error} = useSearch()
-    const {movies, loading ,getMovies} = useMovies({search})
+  const {movies, loading ,getMovies} = useMovies({search, sort})
 /*
   const counter = useRef(0) //referencia que persiste durante los renderizados
   counter.current++
@@ -49,11 +49,15 @@ function App() {
   // no controlada
   const handleSubmit = (event)=>{
     event.preventDefault()
-    getMovies()
+    getMovies({search})
   }
 // controlada
   const handleChange = (event)=>{
     updateSearch(event.target.value)
+  }
+
+  const handleSort =()=>{
+    setSort(!sort)
   }
 
 
@@ -66,6 +70,7 @@ function App() {
               border: '1px solid transparent',
               borderColor: error ? 'red' : 'transparent'
             }} onChange={handleChange} value={search} name='query' type="text" placeholder='Avengers, Star wars, The Matrix...' />
+            <input type="checkbox"  onChange={handleSort} checked={sort}/>
           <button type='submit'>Buscar</button>
         </form>
         {error && <p style={{ color: 'red' }}>{error}</p>} 
