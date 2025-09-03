@@ -1,8 +1,8 @@
 import './App.css'
 import { Movies } from './components/Movies'
 import { useMovies } from './hooks/useMovies'
-import { useRef, useState } from 'react'
-import { useEffect } from 'react'
+import { useRef, useState,useEffect, useCallback } from 'react'
+import debounce from "just-debounce-it";
 
 // CUSTOM HOOK COMBINANDO HOOKS y modularizando logica de Hooks del componente
 function useSearch() {
@@ -47,13 +47,24 @@ function App() {
   console.log(counter.current)
 */
   // no controlada
+
+const debouncedGetMovies = useCallback(
+    debounce(search => {
+      console.log('search', search)
+      getMovies({ search })
+    }, 500)
+    , [getMovies]
+  )
+
   const handleSubmit = (event)=>{
     event.preventDefault()
     getMovies({search})
   }
 // controlada
   const handleChange = (event)=>{
-    updateSearch(event.target.value)
+    const newSearch = event.target.value
+    updateSearch(newSearch)
+    debouncedGetMovies(newSearch)
   }
 
   const handleSort =()=>{
