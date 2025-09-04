@@ -2,6 +2,7 @@ import { useState } from "react";
 import { createContext } from "react"; //useContext nos permite dan informacion a componentes sin hacer prop drilling, y hacer inyeccion de dependencias
 // y se usa para cambios no frecuentes
 // creamos el contexto a consumir
+// eslint-disable-next-line react-refresh/only-export-components
 export const FiltersContext = createContext()
 
 // Este es el que nos provee de acceso al contexto
